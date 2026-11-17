@@ -38,7 +38,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
     <div className="mx-auto flex min-h-[52vh] w-full max-w-3xl flex-col items-center justify-center gap-4 px-4 pb-4 pt-10 text-center">
       <div>
         <h1 className="mb-3 text-balance text-4xl font-semibold text-neutral-100 md:text-5xl">
-          从一个问题，到一份有据可查的研究报告。
+          让关键结论，都有出处
         </h1>
         <p className="text-lg text-neutral-400 md:text-xl">
           输入研究问题，选择研究深度。完整研究先确认计划，再执行检索、写作与评审；仅搜索直接作答。每一步和来源都会保留在历史记录中。
