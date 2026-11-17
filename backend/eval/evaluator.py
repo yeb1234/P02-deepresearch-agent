@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import sys
@@ -72,6 +73,20 @@ class _CaptureCtx:
         import agent.base_agent as mod
 
         mod.WebSearchAgent.step = self._orig_step
+
+
+# ============================================================
+# 图调用 — 主图节点是 async，CLI 侧用 asyncio.run 桥接
+# ============================================================
+
+def _invoke_graph(state: dict, config: dict) -> dict:
+    """同步调用 async 图。
+
+    LangGraph 的主图节点（generate_plan 等）都是 async 函数，
+    直接调用 ``graph.invoke`` 会报 “No synchronous function provided”。
+    评估 CLI 本身是同步入口，这里用 asyncio.run 做一次桥接。
+    """
+    return asyncio.run(graph.ainvoke(state, config=config))
 
 
 # ============================================================
@@ -196,7 +211,7 @@ class Evaluator:
         }
 
         # ---- 阶段 1：触发计划生成 ----
-        phase1_state = graph.invoke(
+        phase1_state = _invoke_graph(
             {"messages": [HumanMessage(content=cfg.topic)]},
             config=config,
         )
@@ -207,7 +222,7 @@ class Evaluator:
             if capture:
                 capture.patch()
             try:
-                phase2_state = graph.invoke(
+                phase2_state = _invoke_graph(
                     {
                         "messages": [
                             HumanMessage(content=cfg.topic),
@@ -226,7 +241,7 @@ class Evaluator:
             plan_b = ""
         else:
             # ---- 阶段 2：发送用户反馈 ----
-            phase2_state = graph.invoke(
+            phase2_state = _invoke_graph(
                 {
                     "messages": [
                         HumanMessage(content=cfg.topic),
@@ -247,7 +262,7 @@ class Evaluator:
                 if capture:
                     capture.patch()
                 try:
-                    phase2_state = graph.invoke(
+                    phase2_state = _invoke_graph(
                         {
                             "messages": [
                                 HumanMessage(content=cfg.topic),

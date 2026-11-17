@@ -15,7 +15,7 @@
   python -m eval.run_eval --mode all
 
   # 指定 judge 模型
-  python -m eval.run_eval --mode e2e --judge-model qwen3.7-max
+  python -m eval.run_eval --mode e2e --judge-model deepseek-v4-pro
 
   # 输出到文件
   python -m eval.run_eval --mode all --output eval_results.json

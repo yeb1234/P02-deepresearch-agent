@@ -16,11 +16,11 @@
 ```
 backend/eval/
 ├── __init__.py          # 包说明
-├── prompts.py           # Judge LLM 评分提示词模板（7 套）
+├── prompts.py           # Judge LLM 评分提示词模板（8 套）
 ├── judge.py             # LLM Judge 封装 + Pydantic 评分数据模型
 ├── evaluator.py         # 评估执行器：端到端 + 组件级评估
 ├── run_eval.py          # CLI 命令行入口
-├── test_set.json        # 测试用例集（5 个 topic）
+├── test_set.json        # 测试用例集（10 个用例：5 基础 + 5 需求澄清）
 └── README.md            # 本文档
 ```
 
@@ -123,6 +123,8 @@ python -m eval.run_eval --mode comp --topic "2025年AI芯片市场趋势" \
 python -m eval.run_eval --mode comp --topic "..." \
   --feedback "看起来很全面，可以开始了" --expected-intent proceed
 ```
+
+> `Configuration.from_runnable_config()` 优先读环境变量。若 `.env` 已设置 `NUMBER_OF_INITIAL_QUERIES` / `MAX_RESEARCH_LOOPS`，`--initial-queries` / `--max-loops` 不会生效；需要最低成本运行时，显式传 `-e NUMBER_OF_INITIAL_QUERIES=1 -e MAX_RESEARCH_LOOPS=1`。
 
 ### `test_set.json` — 测试用例集
 

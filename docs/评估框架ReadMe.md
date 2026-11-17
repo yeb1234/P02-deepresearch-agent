@@ -124,6 +124,8 @@ python -m eval.run_eval --mode comp --topic "..." \
   --feedback "看起来很全面，可以开始了" --expected-intent proceed
 ```
 
+> `Configuration.from_runnable_config()` 优先读环境变量。若 `.env` 已设置 `NUMBER_OF_INITIAL_QUERIES` / `MAX_RESEARCH_LOOPS`，上面的 `--initial-queries` / `--max-loops` 不会生效；需要最低成本运行时，显式传 `-e NUMBER_OF_INITIAL_QUERIES=1 -e MAX_RESEARCH_LOOPS=1`。
+
 ### `test_set.json` — 测试用例集
 
 10 个测试用例（5 个基础 + 5 个带用户反馈的需求澄清测试），覆盖不同领域和难度：

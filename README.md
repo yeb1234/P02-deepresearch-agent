@@ -277,6 +277,7 @@ docker exec -w /app zb02-deepresearch-backend-1 python -m scripts.backfill_histo
 - [架构审查 2026-11-17](docs/架构审查-2026-11-17.md)：NFR、故障模式、风险清单与修复顺序
 - [测试指引](docs/测试指引.md)
 - [评估框架](docs/评估框架ReadMe.md)
+- [低成本模型评估 2026-11-17](docs/评估结果-2026-11-17-低成本模型.md)：Qwen3.8-Flash 与 DeepSeek V4.1-Flash 的单用例对比
 - [大模型安全设计](docs/大模型安全设计.md)
 - [工程投入与工作量评估](docs/项目工作量.md)
 - [前端代码架构](frontend/前端代码架构.md)
