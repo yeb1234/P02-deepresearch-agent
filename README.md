@@ -125,6 +125,7 @@ docker compose down -v
 | `LLM_THINKING_LEVEL` | 默认思考深度：`off` / `standard` / `deep`；默认 `off`，尽量关闭思维链 |
 | `SEARCH_SUMMARY_MODEL` | 查询生成与 MCP 结果摘要模型，默认 `qwen3.8-flash`；和最终写作模型解耦 |
 | `REVIEW_MODEL` | 评审/评估专用模型，默认 `deepseek-v4.1-flash`；反思评估和初稿评审走 DeepSeek，常规生成仍用 Qwen |
+| `KB_EXTRACTOR_MODEL` | KB 事实抽取模型，默认 `deepseek-v4-pro`；低成本评估可改为 `deepseek-v4.1-flash` |
 | `LLM_REQUEST_TIMEOUT` | 单次 LLM 请求超时秒数，默认 `240`；超时后按重试策略返回，不会无限停留在处理状态 |
 | `DASHSCOPE_API_KEY` | 百炼 / DashScope Key；不填时回退到 `APP_TOKEN` |
 | `MCP_APP_ID` | 百炼 MCP 应用 ID，用于 Web 搜索 |

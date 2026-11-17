@@ -11,6 +11,7 @@
 from __future__ import annotations
 
 import json
+import os
 from typing import Optional
 
 from agent.base_agent import Agent
@@ -71,8 +72,9 @@ EXTRACTION_INSTRUCTIONS = """# 任务说明
 class FactExtractor:
     """从搜索结果摘要中提取结构化事实。"""
 
-    def __init__(self, model_id="deepseek-v4-pro"):
-        self.model_id = model_id
+    def __init__(self, model_id: Optional[str] = None):
+        """model_id 优先；否则读 KB_EXTRACTOR_MODEL，最后回退 deepseek-v4-pro。"""
+        self.model_id = model_id or os.getenv("KB_EXTRACTOR_MODEL", "deepseek-v4-pro")
 
     def extract(self, summary: str, research_topic: str = "") -> list[dict]:
         """从单个搜索结果摘要中提取事实。

@@ -9,6 +9,7 @@ WORKDIR /app
 
 COPY src ./src
 COPY scripts ./scripts
+COPY eval ./eval
 
 # 按 pyproject.toml 的依赖清单安装（外加运行时必需但未写入 pyproject 的 loguru/redis/ipython/uvicorn）
 RUN pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple && pip install -i https://pypi.tuna.tsinghua.edu.cn/simple \

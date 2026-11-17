@@ -147,6 +147,13 @@ def main():
         print("没有可评估的主题。请使用 --topic 或确保 test_set.json 存在。")
         sys.exit(1)
 
+    # Configuration.from_runnable_config 优先读环境变量；把 CLI 覆盖写回环境变量，
+    # 否则 .env 里的 NUMBER_OF_INITIAL_QUERIES / MAX_RESEARCH_LOOPS 会覆盖 CLI。
+    if args.initial_queries is not None:
+        os.environ["NUMBER_OF_INITIAL_QUERIES"] = str(args.initial_queries)
+    if args.max_loops is not None:
+        os.environ["MAX_RESEARCH_LOOPS"] = str(args.max_loops)
+
     # 应用 CLI 覆盖参数
     if args.initial_queries is not None or args.max_loops is not None:
         for c in cfgs:

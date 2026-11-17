@@ -1,0 +1,72 @@
+正在以 'e2e' 模式评估 1 个主题...
+2026-11-17 05:25:07.682 +00:00 | INFO     | eval.judge:__init__:165 - Judge 已初始化，模型=deepseek-v4.1-flash
+主题:
+  - 规范驱动开发（SDD）与 AGENTS.md 的关系及最佳实践  (查询数=1, 循环数=1)
+
+2026-11-17 05:25:07.682 +00:00 | INFO     | eval.evaluator:run_e2e:153 - 端到端 [1/1] 主题=规范驱动开发（SDD）与 AGENTS.md 的关系及最佳实践...
+============================================================
+  运行端到端评估...
+============================================================
+2026-11-17 05:25:18.419 +00:00 | INFO     | agent.graph:generate_plan:80 - [MainGraph] 生成的计划 (2324 字)
+2026-11-17 05:25:18.419 +00:00 | INFO     | agent.graph:evaluate_plan:102 - [MainGraph] 等待用户确认计划
+2026-11-17 05:25:18.422 +00:00 | INFO     | agent.graph:evaluate_plan:109 - [MainGraph] 计划已提交确认 → 评估
+2026-11-17 05:25:18.422 +00:00 | INFO     | agent.graph:confirm_plan:200 - [MainGraph] plan explicitly confirmed → research
+2026-11-17 05:25:18.435 +00:00 | INFO     | agent.kb.fact_store:_ensure_collection:285 - [KB] collection 'research_facts' already exists
+2026-11-17 05:25:18.435 +00:00 | INFO     | agent.sub_agents.research_agent:_get_kb_store:69 - [KB] FactStor 连接到 Milvus
+2026-11-17 05:25:18.436 +00:00 | DEBUG    | agent.reranker:__init__:79 - [Reranker] 已初始化（KB 和 Web 精排均已禁用）
+2026-11-17 05:25:18.436 +00:00 | DEBUG    | agent.kb.fact_store:_embed:380 - [KB] embedding 1 texts via https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings (model=text-embedding-v3, attempt=1)
+2026-11-17 05:25:18.701 +00:00 | INFO     | agent.kb.fact_store:query:250 - [KB] query 'User: 规范驱动开发（SDD）与 AGENTS.md 的关系及最佳实践
+Assistant: # 需求清晰度进度条:...' → 20 hits (top score=0.237)
+2026-11-17 05:25:18.701 +00:00 | INFO     | agent.sub_agents.research_agent:_generate_queries:163 - [KB] 检索到 20 个facts 用作查询生成上下文
+2026-11-17 05:25:18.701 +00:00 | INFO     | agent.sub_agents.research_agent:_generate_queries:170 - [ResearchAgent] _generate_queries使用模型: qwen3.8-flash
+2026-11-17 05:25:18.705 +00:00 | DEBUG    | agent.llm.llm:generate_response:147 - 本次访问LLM模型为：qwen3.8-flash
+2026-11-17 05:25:22.930 +00:00 | INFO     | agent.sub_agents.research_agent:_generate_queries:192 - [ResearchAgent] 生成 1 个查询: ['AGENTS.md 规范驱动开发 SDD 最佳实践 2025']
+2026-11-17 05:25:22.934 +00:00 | INFO     | agent.search_cache:_get_redis:68 - [Cache] Redis 连接成功，缓存跨实例共享
+2026-11-17 05:25:22.934 +00:00 | INFO     | agent.search_cache:get_cached:96 - [Cache] ✗ MISS — 'AGENTS.md 规范驱动开发 SDD 最佳实践 2025' 未命中，将通过MCP搜索
+2026-11-17 05:25:22.934 +00:00 | INFO     | agent.base_agent:__init__:46 - 速率限制器已初始化: 最大QPS=12.0, 最小间隔=0.083秒
+2026-11-17 05:25:48.532 +00:00 | INFO     | agent.base_agent:_normalize_pages:557 - [WebSearch] 结果归一化 10 -> 8 条（去重/预算后）
+2026-11-17 05:25:48.533 +00:00 | INFO     | agent.search_cache:set_cached:152 - [Cache] stored — 'AGENTS.md 规范驱动开发 SDD 最佳实践 2025' （8 items, TTL=3600s）→ Redis
+2026-11-17 05:25:48.533 +00:00 | INFO     | agent.sub_agents.research_agent:_web_search:250 - [ResearchAgent] _web_search 摘要使用模型: qwen3.8-flash
+2026-11-17 05:25:48.538 +00:00 | DEBUG    | agent.llm.llm:generate_response:147 - 本次访问LLM模型为：qwen3.8-flash
+2026-11-17 05:25:54.953 +00:00 | INFO     | agent.sub_agents.research_agent:_web_search:259 - [ResearchAgent] 已搜索： 'AGENTS.md 规范驱动开发 SDD 最佳实践 2025'
+2026-11-17 05:25:54.957 +00:00 | DEBUG    | agent.llm.llm:generate_response:147 - 本次访问LLM模型为：deepseek-v4.1-flash
+2026-11-17 05:25:58.383 +00:00 | INFO     | agent.kb.extractor:extract:106 - [KB-extractor] extracted 10 facts from summary (718 chars)
+2026-11-17 05:25:58.383 +00:00 | DEBUG    | agent.kb.fact_store:_embed:380 - [KB] embedding 10 texts via https://dashscope.aliyuncs.com/compatible-mode/v1/embeddings (model=text-embedding-v3, attempt=1)
+2026-11-17 05:25:58.957 +00:00 | INFO     | agent.kb.fact_store:add_facts:103 - [KB] stored 10 facts → Milvus/research_facts (topics: {''})
+2026-11-17 05:25:58.959 +00:00 | INFO     | agent.sub_agents.research_agent:_critique:293 - [ResearchAgent] _critique评估使用模型: qwen3.8-flash
+2026-11-17 05:25:58.963 +00:00 | DEBUG    | agent.llm.llm:generate_response:147 - 本次访问LLM模型为：qwen3.8-flash
+2026-11-17 05:26:02.475 +00:00 | INFO     | agent.sub_agents.research_agent:_critique:319 - [ResearchAgent] 评估是否充足结果：False, gap='当前信息涵盖了AGENTS.md的定位、长度限制及基本维护原则，但缺乏具体的「模板Schema结构」示例以及SDD在Agent开发中的「自动化测试与验证流程」。...'
+2026-11-17 05:26:02.476 +00:00 | INFO     | agent.sub_agents.research_agent:_route_after_critique:343 - [ResearchAgent] 退出循环，已执行 1 次
+2026-11-17 05:26:02.478 +00:00 | INFO     | agent.sub_agents.writer_agent:_outline:56 - [WriterAgent] outline 准备使用模型=qwen3.8-flash
+2026-11-17 05:26:15.823 +00:00 | INFO     | agent.sub_agents.writer_agent:_outline:66 - [WriterAgent] outline generated (1192 chars)
+2026-11-17 05:26:15.824 +00:00 | INFO     | agent.sub_agents.writer_agent:_draft:83 - [WriterAgent] _draft 准备使用模型=qwen3.8-flash
+2026-11-17 05:26:15.824 +00:00 | INFO     | agent.sub_agents.writer_agent:_draft:100 - [WriterAgent] drafting from scratch
+2026-11-17 05:26:45.570 +00:00 | INFO     | agent.sub_agents.writer_agent:_draft:115 - [WriterAgent] draft generated (4431 chars)
+2026-11-17 05:26:45.571 +00:00 | INFO     | agent.sub_agents.writer_agent:_critic_review:126 - [WriterAgent] critic reviewing draft 准备使用模型=qwen3.8-flash
+2026-11-17 05:26:55.152 +00:00 | INFO     | agent.sub_agents.writer_agent:_critic_review:165 - [WriterAgent] critic score=8.5/10, issues=2 (critical=0, major=0, minor=2), ready_for_polish=True
+2026-11-17 05:26:55.152 +00:00 | INFO     | agent.sub_agents.writer_agent:_route_after_critic:201 - [WriterAgent] Critic ready_for_polish (score=8.5/10) → polish
+2026-11-17 05:26:55.153 +00:00 | INFO     | agent.sub_agents.writer_agent:_cite_and_polish:240 - [WriterAgent] polishing 准备使用模型=qwen3.8-flash
+2026-11-17 05:27:20.167 +00:00 | INFO     | agent.sub_agents.writer_agent:_cite_and_polish:275 - [WriterAgent] polished (4960 chars), 6 sources cited, 0 revision(s)
+2026-11-17 05:27:20.168 +00:00 | INFO     | eval.judge:evaluate_report:202 - 端到端开始评估.........
+2026-11-17 05:27:20.172 +00:00 | DEBUG    | agent.llm.llm:generate_response:147 - 本次访问LLM模型为：deepseek-v4.1-flash
+[Judge] 第 1 次尝试成功，解析出 8 个顶层键
+
+========================================================================
+  DeepResearch Agent 评估报告
+========================================================================
+
+--- 端到端报告得分 ---
+
+  主题: 规范驱动开发（SDD）与 AGENTS.md 的关系及最佳实践
+    总评分: 4.0/5
+    事实准确性: 4/5
+    信息覆盖度: 4/5
+    逻辑结构:   5/5
+    时效性:     4/5
+    引用质量:   3/5
+    幻觉:       无
+
+  ** 平均总评分: 4.0/5 (n=1) **
+
+2026-11-17 05:27:28.489 +00:00 | INFO     | eval.evaluator:run_e2e:166 -   总评分=4.0
+2026-11-17 05:27:28.502 +00:00 | INFO     | eval.evaluator:save_eval_report:507 - 完整评估报告已保存至 /app/eval_results/eval_qwen38flash_min_20261117.json

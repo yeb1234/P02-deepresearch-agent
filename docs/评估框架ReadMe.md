@@ -124,7 +124,9 @@ python -m eval.run_eval --mode comp --topic "..." \
   --feedback "看起来很全面，可以开始了" --expected-intent proceed
 ```
 
-> `Configuration.from_runnable_config()` 优先读环境变量。若 `.env` 已设置 `NUMBER_OF_INITIAL_QUERIES` / `MAX_RESEARCH_LOOPS`，上面的 `--initial-queries` / `--max-loops` 不会生效；需要最低成本运行时，显式传 `-e NUMBER_OF_INITIAL_QUERIES=1 -e MAX_RESEARCH_LOOPS=1`。
+> `run_eval.py` 会把 `--initial-queries` / `--max-loops` 写回环境变量，因此 CLI 值会覆盖 `.env` 中的 `NUMBER_OF_INITIAL_QUERIES` / `MAX_RESEARCH_LOOPS`。如果直接调用 `Evaluator` 而不经过 CLI，则需要自己设置这两个环境变量。
+>
+> 事实抽取默认走 `deepseek-v4-pro`；低成本评估可设 `KB_EXTRACTOR_MODEL=deepseek-v4.1-flash`。
 
 ### `test_set.json` — 测试用例集
 
